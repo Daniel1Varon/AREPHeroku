@@ -1,9 +1,5 @@
 package edu.escuelaing.arep;
 
-/*
- * Author: Daniel Varón
- */
-
 import static spark.Spark.*;
 
 public class SparkWebApp {
