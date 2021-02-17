@@ -10,6 +10,7 @@ import static spark.Spark.*;
  */
 
 public class SparkWebApp {
+    private final static Logger logger = LoggerFactory.getLogger(SparkWebApp.class);
     public static void main(String[] args) {
         port(getPort());
         get("/hello", (req, res) -> "Hello Heroku");
@@ -34,7 +35,11 @@ public class SparkWebApp {
             return respuesta;
         });
 
-        get("/hola/:nombre", (req, res) -> "¡Hola " + req.params(":nombre") + "!");
+        get("/hola/:nombre", (req, res) -> {
+            String hola = "¡Hola " + req.params(":nombre") + "!";
+            logger.info("hola: " + hola);
+            return hola;
+        });
 
     }
 
