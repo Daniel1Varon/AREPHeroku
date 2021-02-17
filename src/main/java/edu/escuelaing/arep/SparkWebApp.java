@@ -12,20 +12,20 @@ import static spark.Spark.*;
 public class SparkWebApp {
     public static void main(String[] args) {
         port(getPort());
-        get("/calculator",(req,res)-> inputDataPage(req,res));
+        get("/calculator", SparkWebApp::inputDataPage);
         get("/results",(req,res)->{
-            String values = req.queryParams("numbers");
+            String values = req.queryParams("numeros");
             String[] valuesInStringArray = values.split(",");
             LinkedList linkedList = new LinkedList();
             for(String v:valuesInStringArray){
                 linkedList.addNode(Float.parseFloat(v));
             }
-            double mean = Calculator.mean(linkedList);
-            double deviation = Calculator.deviation(linkedList,mean);
+            double media = Calculator.mean(linkedList);
+            double desviacion = Calculator.deviation(linkedList,media);
             JSONObject jsonValue = new JSONObject();
-            jsonValue.put("numbers",String.join(" ",valuesInStringArray));
-            jsonValue.put("mean",mean);
-            jsonValue.put("deviation",deviation);
+            jsonValue.put("numeros",String.join(" ",valuesInStringArray));
+            jsonValue.put("media",media);
+            jsonValue.put("desviacion",desviacion);
             return outputDataPage(jsonValue);
         });
     }
@@ -36,20 +36,18 @@ public class SparkWebApp {
      * @return A String that have a template of a HTML
      */
     private static String outputDataPage(JSONObject json){
-        String pageContent
-                = "<!DOCTYPE html>"
-                + "<html>"
-                + "<body>"
-                + "<h2>Calculadora de media y Desviación Estándar</h2>"
-                + "<h4>Valores</h4>"
-                + json.get("numbers")
-                + "<h4>Media</h4>"
-                + json.get("mean")
-                + "<h4>Desviación Estándar</h4>"
-                + json.get("deviation")
-                + "</body>"
-                + "</html>";
-        return pageContent;
+        return "<!DOCTYPE html>"
+        + "<html>"
+        + "<body>"
+        + "<h2>Calculadora de media y Desviación Estándar</h2>"
+        + "<h4>Valores</h4>"
+        + json.get("numeros")
+        + "<h4>Media</h4>"
+        + json.get("media")
+        + "<h4>Desviación Estándar</h4>"
+        + json.get("desviacion")
+        + "</body>"
+        + "</html>";
     }
 
     /**
@@ -59,21 +57,19 @@ public class SparkWebApp {
      * @return A String that have a template of a HTML
      */
     private static String inputDataPage(Request req, Response res) {
-        String pageContent
-                = "<!DOCTYPE html>"
-                + "<html>"
-                + "<body>"
-                + "<h2>Calculadora de media y Desviación Estándar</h2>"
-                + "<form action=\"/results\">"
-                + "  Números:<br>"
-                + "  <input type=\"text\" name=\"números\" value=\"\">"
-                + "  <br><br>"
-                + "  <input type=\"submit\" value=\"Enviar\">"
-                + "</form>"
-                + "<b>Debes poner los valores separados por comas \",\" en el espacio de números.</b>"
-                + "</body>"
-                + "</html>";
-        return pageContent;
+        return "<!DOCTYPE html>"
+        + "<html>"
+        + "<body>"
+        + "<h2>Calculadora de media y Desviación Estándar</h2>"
+        + "<form action=\"/results\">"
+        + "  Números:<br>"
+        + "  <input type=\"text\" name=\"numeros\" value=\"\">"
+        + "  <br><br>"
+        + "  <input type=\"submit\" value=\"Enviar\">"
+        + "</form>"
+        + "<b>Debes poner los valores separados por comas \",\" en el espacio de números.</b>"
+        + "</body>"
+        + "</html>";
     }
 
     /**
