@@ -9,6 +9,10 @@ Para revisar el laboratorio se debe clonar el repositorio con el siguiente codig
 
 > git clone https://github.com/Daniel1Varon/AREPHeroku
 
+o entrar a la siguiente pagina.
+
+> https://blooming-cove-08571.herokuapp.com/calculator
+
 ### Prerequisitos
 
 ```
@@ -26,7 +30,13 @@ Heroku
 Para correr las pruebas del programa se debe correr el archivo AppTI en el paquete de test de la carpeta.
 
 ```
-src\test\java\edu\escuelaing\arem\ASE\app\AppIT.java
+src\test\java\edu\escuelaing\arep\AppTest.java
+```
+
+o por el comando de maven
+
+```
+mvn test
 ```
 
 ### Desglose en pruebas de extremo a extremo
@@ -39,6 +49,7 @@ Las pruebas se conforman de 2 casos de prueba los cuales cada uno contiene 10 da
 * [Maven](https://maven.apache.org/) - Gestión de dependencias.
 * [GitHub](https://github.com/) - Sistema de control específico de versión de fuente abierta.
 * [Heroku](https://www.heroku.com/) - Despliegue aplicación web.
+* [Spark](http://sparkjava.com/) - Framework.
 
 ## Autor
 
